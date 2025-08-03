@@ -53,7 +53,7 @@ def note_to_string_fret(note_str):
 
 def create_musicxml_from_notes(note_data):
     s = stream.Part()
-    s.id = 'Bass'
+    s.id = 'Tab'
 
     for entry in note_data:
         string_fret = note_to_string_fret(entry['note'])
