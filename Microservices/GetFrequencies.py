@@ -4,8 +4,8 @@ import pandas as pd
 from music21 import stream, note, pitch, tablature, meter, tempo, instrument
 
 
-standard_bass = ['E1', 'A1', 'D2', 'G2']
 
+standard_bass = ['E1', 'A1', 'D2', 'G2']
 
 def stable_note_grouping(times, freqs, confs, threshold=0.7, stability=3):
     data = [
@@ -13,11 +13,9 @@ def stable_note_grouping(times, freqs, confs, threshold=0.7, stability=3):
         for t, f, c in zip(times, freqs, confs)
         if c > threshold
     ]
+
     groups = []
-    cur_note = None
-    cur_start = None
-    candidate_note = None
-    count = 0
+    cur_note, cur_start, candidate_note, count = None, None, None, 0
     for _, (t, _, note_str) in enumerate(data):
         if note_str == cur_note:
             candidate_note = None
@@ -71,7 +69,6 @@ def create_musicxml_from_notes(note_data, BPM):
     current_measure = stream.Measure()
     current_measure_time = 0.0
     measure_number = 1
-    
 
     for entry in note_data:
         string_fret = note_to_string_fret(entry['note'])
@@ -97,7 +94,6 @@ def create_musicxml_from_notes(note_data, BPM):
     score.append(part)
     score.write('musicxml', fp='bass_tab.xml')
     print("MusicXML file saved!'")
-
 
 
 waveform, sample_rate = librosa.load("bass.wav", sr=16000)

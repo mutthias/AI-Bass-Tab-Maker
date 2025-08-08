@@ -2,7 +2,7 @@ import subprocess
 import os
 import sys
 
-def separate_audio(input_file, output_dir="demucs_output"):
+def separate_audio(input_file, output_dir="./Demucs/demucs_output"):
     os.makedirs(output_dir, exist_ok=True)
 
     command = [
