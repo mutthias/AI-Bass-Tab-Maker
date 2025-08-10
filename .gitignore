@@ -3,3 +3,7 @@
 .env
 
 ./Demucs/demucs_output
+
+./Client/node_modules
+
+node_modules
