@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
+
 function page() {
 
   const [message, setMessage] = useState("Loading...")
@@ -17,8 +18,25 @@ function page() {
     )
   }, [])
   return (
-    <div>
-      <p>{message || "Loading..."}</p>
+    <div className='flex flex-col'>
+      <section className='relative h-screen w-screen'>
+        <video 
+          className='absolute top-0 left-0 w-full h-full object-cover'
+          src="./thundercat.mp4"
+          autoPlay
+          loop
+          playsInline
+          muted
+        />
+
+        <div className="absolute top-0 left-0 w-full h-full bg-black/50" />
+      </section>
+
+      <section className='py-10 bg-gray-300'>
+          <p>{message || "Loading..."}</p>
+
+      </section>
+
     </div>
   )
 }
