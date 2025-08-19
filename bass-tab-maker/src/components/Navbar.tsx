@@ -23,8 +23,8 @@ const Navbar = () => {
       <div className="flex items-center">
         <ul className="flex space-x-8">
           <Link href="/">Home</Link>
+          <Link href="/dashboard">Dashboard</Link>
           <Link href="/about">About</Link>
-          <Link href="">View on Github</Link>
         </ul>
       </div>
     </nav>
