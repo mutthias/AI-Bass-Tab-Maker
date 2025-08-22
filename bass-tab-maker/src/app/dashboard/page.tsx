@@ -1,8 +1,12 @@
+"use client";
+
 import React from 'react'
 import TabCard from '@/components/TabCard'
 import score from '../../../public/scoredummy.png'
+import { useState } from 'react'
 
 const page = () => {
+  const [search, setSearch] = useState('');
   const temp_cards = [
     {
       title: 'I can Tell',
@@ -12,41 +16,42 @@ const page = () => {
       height: 'h-72'
     }, 
     {
-      title: 'I can Tell',
+      title: `Vibes don't Lie`,
+      artist: 'Leon Thomas',
+      image_src: score,
+      width: 'w-64',
+      height: 'h-72'
+    },
+    {
+      title: 'Rather Be',
       artist: 'Giveon',
       image_src: score,
       width: 'w-64',
       height: 'h-72'
     },
     {
-      title: 'I can Tell',
-      artist: 'Giveon',
+      title: 'Is it a Crime',
+      artist: 'Sade',
       image_src: score,
       width: 'w-64',
       height: 'h-72'
     },
     {
-      title: 'I can Tell',
-      artist: 'Giveon',
+      title: 'Marvin Gaye',
+      artist: `What's Going On`,
       image_src: score,
       width: 'w-64',
       height: 'h-72'
     },
     {
-      title: 'I can Tell',
-      artist: 'Giveon',
-      image_src: score,
-      width: 'w-64',
-      height: 'h-72'
-    },
-    {
-      title: 'I can Tell',
-      artist: 'Giveon',
+      title: 'N Side',
+      artist: 'Steve Lacy',
       image_src: score,
       width: 'w-64',
       height: 'h-72'
     }
-  ]
+  ];
+
   return (
     <div className='p-0 sm:p-16 md:p-32 flex justify-center'>
 
@@ -61,11 +66,14 @@ const page = () => {
             placeholder='Search tablature...'
             type='text'
             className='w-full px-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-8'
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         <div className='grid gap-12 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] max-w-[1400px] w-full place-items-center'>
-          {temp_cards.map((card, index) => (
+          {temp_cards.filter((card) => {
+            return search.toLowerCase().trim() === "" ? card : card.artist.toLowerCase().includes(search)
+          }).map((card, index) => (
             <TabCard 
               key={index} 
               title={card.title} 
