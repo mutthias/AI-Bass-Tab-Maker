@@ -24,23 +24,60 @@ const page = () => {
       image_src: score,
       width: 'w-64',
       height: 'h-72'
+    },
+    {
+      title: 'I can Tell',
+      artist: 'Giveon',
+      image_src: score,
+      width: 'w-64',
+      height: 'h-72'
+    },
+    {
+      title: 'I can Tell',
+      artist: 'Giveon',
+      image_src: score,
+      width: 'w-64',
+      height: 'h-72'
+    },
+    {
+      title: 'I can Tell',
+      artist: 'Giveon',
+      image_src: score,
+      width: 'w-64',
+      height: 'h-72'
     }
   ]
   return (
-    <div className='p-8 flex justify-center'>
-      <div className='flex justify-center flex-wrap gap-32'>
-        {temp_cards.map((card, index) => (
-          <TabCard 
-            key={index} 
-            title={card.title} 
-            artist={card.artist} 
-            image_src={card.image_src}
-            width={card.width}
-            height={card.height}
-            />
-        ))}
+    <div className='p-0 sm:p-16 md:p-32 flex justify-center'>
 
-      </div>
+      <section className='flex flex-col items-left w-full max-w-[1400px]'>
+
+        <h1 className='text-2xl mb-12'>
+          Your Saved sheets:
+        </h1>
+
+        <div className='w-full flex mb-8'>
+          <input
+            placeholder='Search tablature...'
+            type='text'
+            className='w-full px-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 h-8'
+          />
+        </div>
+
+        <div className='grid gap-12 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] max-w-[1400px] w-full place-items-center'>
+          {temp_cards.map((card, index) => (
+            <TabCard 
+              key={index} 
+              title={card.title} 
+              artist={card.artist} 
+              image_src={card.image_src}
+              width={card.width}
+              height={card.height}
+              />
+          ))}
+        </div>
+      </section>
+
     </div>
   )
 }
