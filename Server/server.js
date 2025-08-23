@@ -15,11 +15,11 @@ app.get("/api/home", (req, res) => {
 });
 
 app.post("/users", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
-      [username, password]
+      "INSERT INTO Users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING *",
+      [username, password, email]
     );
     res.json(result.rows[0]);
   } catch (err) {
