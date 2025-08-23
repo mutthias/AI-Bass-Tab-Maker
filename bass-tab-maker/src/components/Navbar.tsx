@@ -8,7 +8,7 @@ import logo from '../../public/githublogo.png'
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-400 px-8 py-7 flex justify-between items-center shadow-lg">
+    <nav className=" border-b-1 px-8 py-7 flex justify-between items-center ">
       <div className="flex items-center">
         <Link href="https://github.com/mutthias/AI-Bass-Tab-Maker" target="_blank">
           <Image

@@ -1,0 +1,44 @@
+[
+  {
+    "title": "I can Tell",
+    "artist": "Giveon",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  },
+  {
+    "title": "Vibes don't Lie",
+    "artist": "Leon Thomas",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  },
+  {
+    "title": "Rather Be",
+    "artist": "Giveon",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  },
+  {
+    "title": "Is it a Crime",
+    "artist": "Sade",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  },
+  {
+    "title": "Marvin Gaye",
+    "artist": "What's Going On",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  },
+  {
+    "title": "N Side",
+    "artist": "Steve Lacy",
+    "image_src": "score",
+    "width": "w-64",
+    "height": "h-72"
+  }
+]
