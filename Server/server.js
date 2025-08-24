@@ -3,7 +3,9 @@ import cors from "cors";
 import pool from "./db.js"
 
 import auth from "./routes/auth.js";
-
+import tabProcessor from "./routes/tabProcessor.js";
+import tabSaver from "./routes/tabSaver.js";
+import users from "./routes/users.js"
 
 const app = express();
 const PORT = 8080
@@ -17,19 +19,8 @@ app.get("/api/home", (req, res) => {
   });
 });
 
-app.post("/users", async (req, res) => {
-  const { username, password, email } = req.body;
-  try {
-    const result = await pool.query(
-      "INSERT INTO Users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING *",
-      [username, password, email]
-    );
-    res.json(result.rows[0]);
-  } catch (err) {
-    res.status(500).json({error: err.message});
-  }
-});
-
+// Imported routes here 
+app.use("/auth", auth);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
