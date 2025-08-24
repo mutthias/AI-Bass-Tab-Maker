@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import pool from "./db.js"
 
+import auth from "./routes/auth.js";
+
+
 const app = express();
 const PORT = 8080
 
