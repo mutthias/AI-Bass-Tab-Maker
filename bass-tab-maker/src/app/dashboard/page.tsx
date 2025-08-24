@@ -3,11 +3,33 @@
 import React from 'react'
 import TabCard from '@/components/TabCard'
 import score from '../../../public/scoredummy.png'
-import { useState } from 'react'
+import {useEffect, useState } from 'react'
 import test_data from "../../../test-data/testdata.json"
 
+
 const page = () => {
+  const [tabs, setTabs] = useState([]);
   const [search, setSearch] = useState('')
+
+// useEffect(() => {
+//   fetch("http://localhost:8080/tabSaver").then(
+//     response => response.json()
+//   ).then(
+//     data => {
+//       console.log(data);
+//       setTabs(data.message);
+//     }
+//   )
+// }, [])
+  const AddTab = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/tabSaver/add_tab");
+      const data = await res.json();
+      setTabs(data);
+    } catch (e) {
+      setTabs([]);
+    }
+  }
 
   return (
     <div className='p-0 sm:p-16 md:p-32 flex justify-center'>
