@@ -40,7 +40,9 @@ const page = () => {
         </h1>
         
         <div className='py-2'>
-          <button className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
+          <button
+            onClick={AddTab}
+            className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
             Add new tab
           </button>
         </div>
