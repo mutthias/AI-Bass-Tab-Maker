@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./bass-tab-maker
+    container_name: bass-tab-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./bass-tab-maker:/app
+      - /app/node_modules 
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8080
+  
+  backend:
+    build: ./Server
+    container_name: bass-tab-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    env_file:
+      - ./Server/.env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+    volumes:
+      - ./Server:/app
+
+  db:
+    image: postgres:15
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "9500:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      
+  # microservices:
+  #   build: ./Microservices
+  #   container_name: bass-tab-microservices
+  #   command: [ "python3", "test.py"]
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - ./Microservices:/app
+
+volumes:
+  pgdata:
+      
