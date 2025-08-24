@@ -11,12 +11,17 @@ const page = () => {
 
   return (
     <div className='p-0 sm:p-16 md:p-32 flex justify-center'>
-
       <section className='flex flex-col items-left w-full max-w-[1400px]'>
 
         <h1 className='text-3xl mb-12 font-bold'>
           Your Saved sheets:
         </h1>
+        
+        <div className='py-2'>
+          <button className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
+            Add new tab
+          </button>
+        </div>
 
         <div className='w-full flex mb-8'>
           <input
@@ -41,8 +46,8 @@ const page = () => {
               />
           ))}
         </div>
-      </section>
 
+      </section>
     </div>
   )
 }
