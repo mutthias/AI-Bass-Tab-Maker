@@ -27,7 +27,7 @@ app.post("/users", async (req, res) => {
   }
 });
 
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
 })
-
