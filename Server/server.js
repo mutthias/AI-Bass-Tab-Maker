@@ -21,6 +21,7 @@ app.get("/api/home", (req, res) => {
 
 // Imported routes here 
 app.use("/auth", auth);
+app.use("/tabSaver", tabSaver)
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
