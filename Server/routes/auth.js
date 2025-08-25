@@ -10,7 +10,7 @@ router.post("/users", async (req, res) => {
       "INSERT INTO Users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING *",
       [username, password, email]
     );
-    res.json(result.rows[0]);
+    res.status(200).then(res.json(result.rows[0]));
   } catch (err) {
     res.status(500).json({error: err.message});
   }
