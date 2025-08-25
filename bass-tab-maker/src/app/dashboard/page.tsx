@@ -21,20 +21,21 @@ const page = () => {
 //     }
 //   )
 // }, [])
-  const AddTab = async () => {
+  const AddTab = async ( { title, artist, userid }: {title: string, artist: string, userid: number}) => {
     try {
-      const res = await fetch("http://localhost:8080/tabSaver/add_tab", {
+      const res = await fetch("http://localhost:8080/tabSaver/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: "La Mentira",
-          artist: "Luis Miguel",
-          user_id: 1
+          title: title,
+          artist: artist,
+          user_id: userid
         }),
       });
       const data = await res.json();
+      console.log(data);
       setTabs(data);
     } catch (e) {
       setTabs([]);
@@ -51,7 +52,11 @@ const page = () => {
         
         <div className='py-2'>
           <button
-            onClick={AddTab}
+            onClick={() => AddTab({
+              title: "At Your Best (You are Love)", 
+              artist: "Aaliyah", 
+              userid: 1
+            })}
             className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
             Add new tab
           </button>
