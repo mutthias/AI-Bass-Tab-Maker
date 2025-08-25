@@ -23,7 +23,17 @@ const page = () => {
 // }, [])
   const AddTab = async () => {
     try {
-      const res = await fetch("http://localhost:8080/tabSaver/add_tab");
+      const res = await fetch("http://localhost:8080/tabSaver/add_tab", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "La Mentira",
+          artist: "Luis Miguel",
+          user_id: 1
+        }),
+      });
       const data = await res.json();
       setTabs(data);
     } catch (e) {
