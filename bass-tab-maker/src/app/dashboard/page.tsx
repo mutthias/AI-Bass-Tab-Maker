@@ -7,20 +7,30 @@ import {useEffect, useState } from 'react'
 import test_data from "../../../test-data/testdata.json"
 
 
+type Tab = {
+  id: number,
+  user_id: number,
+  title: string,
+  artist: string,
+  created_at: Date
+}
+
 const page = () => {
-  const [tabs, setTabs] = useState([]);
+
+  const [tabs, setTabs] = useState<Tab[]>([]);
   const [search, setSearch] = useState('')
 
-// useEffect(() => {
-//   fetch("http://localhost:8080/tabSaver").then(
-//     response => response.json()
-//   ).then(
-//     data => {
-//       console.log(data);
-//       setTabs(data.message);
-//     }
-//   )
-// }, [])
+  useEffect(() => {
+    fetch("http://localhost:8080/tabSaver/all").then(
+      response => response.json()
+    ).then(
+      data => {
+        console.log(data);
+        setTabs(data);
+      }
+    )
+  }, [])
+
   const AddTab = async ( { title, artist, userid }: {title: string, artist: string, userid: number}) => {
     try {
       const res = await fetch("http://localhost:8080/tabSaver/add", {
@@ -36,7 +46,7 @@ const page = () => {
       });
       const data = await res.json();
       console.log(data);
-      setTabs(data);
+      setTabs((tab) => [...tab, data.tab]);
     } catch (e) {
       setTabs([]);
     }
@@ -53,8 +63,8 @@ const page = () => {
         <div className='py-2'>
           <button
             onClick={() => AddTab({
-              title: "At Your Best (You are Love)", 
-              artist: "Aaliyah", 
+              title: "i", 
+              artist: "Kendrick Lamar", 
               userid: 1
             })}
             className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
@@ -72,7 +82,7 @@ const page = () => {
         </div>
 
         <div className='grid gap-12 grid-cols-[repeat(auto-fit,minmax(250px,1fr))] max-w-[1400px] w-full place-items-center'>
-          {test_data.filter((card) => {
+          {tabs.filter((card) => {
             return search.toLowerCase().trim() === "" ? card : card.artist.toLowerCase().includes(search)
           }).map((card, index) => (
             <TabCard 
@@ -80,8 +90,8 @@ const page = () => {
               title={card.title} 
               artist={card.artist} 
               image_src={score}
-              width={card.width}
-              height={card.height}
+              width="w-64"
+              height="h-72"
               />
           ))}
         </div>
