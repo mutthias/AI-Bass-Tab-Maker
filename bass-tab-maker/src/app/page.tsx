@@ -18,8 +18,8 @@ function page() {
     )
   }, [])
   return (
-    <div className='flex flex-col'>
-      <section className='relative h-screen w-screen'>
+    <div className='flex flex-col h-screen'>
+      <section className='relative h-1/2 w-screen flex items-center justify-center text-center'>
         <video 
           className='absolute top-0 left-0 w-full h-full object-cover'
           src="./thundercat.mp4"
@@ -30,6 +30,12 @@ function page() {
         />
 
         <div className="absolute top-0 left-0 w-full h-full bg-black/50" />
+        
+        <div className='relative z-10 text-white'>
+          <h1 className='text-6xl font-bold'>AI Bass Tab Creator</h1>
+          <h2 className='text-lg mt-4'>Upload your favorite songs and get Musescore tabs using AI!</h2>
+        </div>
+
       </section>
 
       <section className='py-10 bg-gray-300'>
