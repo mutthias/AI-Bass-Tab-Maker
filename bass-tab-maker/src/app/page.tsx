@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
+import LoginForm from '@/components/LoginForm'
 
 
 function page() {
@@ -38,9 +39,8 @@ function page() {
 
       </section>
 
-      <section className='py-10 bg-gray-300'>
-          <p>{message || "Loading..."}</p>
-
+      <section className='py-10'>
+          <LoginForm />
       </section>
 
     </div>
