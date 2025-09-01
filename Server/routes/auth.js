@@ -7,12 +7,12 @@ const router = Router();
 const jwt_secret = process.env.JWT_SECRET;
 
 router.post("/register", async (req, res) => {
-  const { username, password, email } = req.body;
+  const { email, password } = req.body;
   try {
     const hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      "INSERT INTO Users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING *",
-      [username, password, email]
+      "INSERT INTO Users (email, password_hash) VALUES ($1, $2) RETURNING *",
+      [email, hash]
     );
     res.status(200).then(res.json(result.rows[0]));
   } catch (err) {

@@ -22,7 +22,7 @@ const LoginForm = () => {
       setErr("Please fill in all fields.");
       return;
     } else if (!isLogin && password !== confirmPw) {
-      setErr("Passwords do not ");
+      setErr("Passwords do not match.");
       return;
     }
 
@@ -36,7 +36,7 @@ const LoginForm = () => {
         },
         body: JSON.stringify({
           email,
-          password
+          password,
         }),
       });
 
