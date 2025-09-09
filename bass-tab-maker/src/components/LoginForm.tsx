@@ -27,7 +27,7 @@ const LoginForm = () => {
     }
 
     try {
-      const endpoint = isLogin ? "auth/login" : "auth/register";
+      const endpoint = isLogin ? "users/login" : "users/register";
 
       const res = await fetch(`http://localhost:8080/${endpoint}`, {
         method: "POST",
@@ -41,9 +41,10 @@ const LoginForm = () => {
       });
 
       const data = await res.json();
-      
+
       if (!res.ok) {
-        setErr(data.message || "Something went wrong with the request.");
+        setErr(data.message || "Invalid credentials.");
+        return;
       } else {
         setStatus(data.message || (isLogin ? "Logged in." : "Registered user."));
       }
@@ -54,6 +55,7 @@ const LoginForm = () => {
 
     } catch (error) {
       setErr("Something is wrong with the server. Try again later!");
+      return;
     }
   }
 

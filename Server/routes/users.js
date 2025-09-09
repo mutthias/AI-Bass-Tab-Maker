@@ -16,7 +16,10 @@ router.post("/register", async (req, res) => {
     );
     res.status(200).then(res.json(result.rows[0]));
   } catch (err) {
-    res.status(500).json({error: err.message});
+    res.status(500).json({
+      error: err.message,
+      status: 500
+    });
   }
 });
 
@@ -24,18 +27,26 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const res = await pool.query(
+    const result = await pool.query(
       "SELECT * FROM Users WHERE email = $1", 
       [email]
     );
 
+    const user = result.rows[0];
+
     if (!user){
-      return res.status(401).json({error: "This user does not exist!"});
+      return res.status(401).json({
+        error: "This user does not exist!",
+        status: 401
+      });
     }
 
-    const valid = bcrypt.compare(password, user.password_hash);
+    const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) {
-      return res.status(403).json({error: "Invalid password!"});
+      return res.status(403).json({
+        error: "Invalid password!",
+        status: 403
+      });
     }
 
     const token = jwt.sign(
@@ -43,7 +54,7 @@ router.post("/login", async (req, res) => {
         id: user.id, 
         email: user.email
       },
-        JWT_SECRET,
+        jwt_secret,
       {
         expiresIn: "1h"
       }
@@ -52,7 +63,8 @@ router.post("/login", async (req, res) => {
 
   } catch (err) {
     res.status(500).json({
-      error: "Oops! Something went wrong."
+      error: "Oops! Something went wrong.",
+      status: 500
     });
   }
 })
