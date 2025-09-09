@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import pool from "./db.js"
 
-import auth from "./routes/auth.js";
 import tabProcessor from "./routes/tabProcessor.js";
 import tabSaver from "./routes/tabSaver.js";
 import users from "./routes/users.js"
@@ -20,8 +19,9 @@ app.get("/api/home", (req, res) => {
 });
 
 // Imported routes here 
-app.use("/auth", auth);
-app.use("/tabSaver", tabSaver)
+app.use("/tabProcessor", tabProcessor);
+app.use("/tabSaver", tabSaver);
+app.use("/users", users);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)

@@ -41,7 +41,7 @@ const LoginForm = () => {
       });
 
       const data = await res.json();
-
+      
       if (!res.ok) {
         setErr(data.message || "Something went wrong with the request.");
       } else {
