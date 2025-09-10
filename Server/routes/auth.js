@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export function authToken(req, res, next) {
-  const header = req.headers("authorization");
+  const header = req.headers["authorization"];
   const token = header && header.split(" ")[1]; // because header = "Bearer <token>"
 
   if (!token) {
