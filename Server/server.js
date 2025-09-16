@@ -5,12 +5,17 @@ import pool from "./db.js"
 import tabProcessor from "./routes/tabProcessor.js";
 import tabSaver from "./routes/tabSaver.js";
 import users from "./routes/users.js"
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 8080
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 app.use(express.json())
+app.use(cookieParser())
 
 app.get("/api/home", (req, res) => {
   res.json({ 

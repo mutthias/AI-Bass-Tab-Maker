@@ -1,15 +1,17 @@
 import { authToken } from "./auth.js";
 import { Router } from "express";
+import cookieParser from "cookie-parser";
 import pool from "../db.js";
 
 const router = Router();
+
 
 router.get("/all", async (req, res) => {
   try {
     console.log(req.user)
     const posts = await pool.query(
       "SELECT * FROM tabpost WHERE user_id = 4 ORDER BY created_at DESC"
-      
+    
     );
     res.json(posts.rows);
   } catch (err) {
