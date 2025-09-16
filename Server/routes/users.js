@@ -11,7 +11,7 @@ router.post("/register", async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      "INSERT INTO Users (email, password_hash) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO Users (email, password_hash) VALUES ($1, $2) RETURNING id, email",
       [email, hash]
     );
     res.status(200).then(res.json(result.rows[0]));
@@ -59,7 +59,21 @@ router.post("/login", async (req, res) => {
         expiresIn: "1h"
       }
     );
-    res.status(200).then(res.json({token}));
+
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60
+    })
+
+    res.status(200).json({
+      message: "User logged in!",
+      user: {
+        id: user.id,
+        email: user.email
+      }
+    })
 
   } catch (err) {
     res.status(500).json({
