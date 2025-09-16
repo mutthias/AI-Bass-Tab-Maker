@@ -21,7 +21,9 @@ const page = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    fetch("http://localhost:8080/tabSaver/all").then(
+    fetch("http://localhost:8080/tabSaver/all", {
+      credentials: "include"
+    }).then(
       response => response.json()
     ).then(
       data => {
@@ -31,7 +33,7 @@ const page = () => {
     )
   }, [])
 
-  const AddTab = async ( { title, artist, userid }: {title: string, artist: string, userid: number}) => {
+  const AddTab = async ( { title, artist }: {title: string, artist: string}) => {
     try {
       const res = await fetch("http://localhost:8080/tabSaver/add", {
         method: "POST",
@@ -41,8 +43,8 @@ const page = () => {
         body: JSON.stringify({
           title: title,
           artist: artist,
-          user_id: userid
         }),
+        credentials: "include"
       });
       const data = await res.json();
       console.log(data);
@@ -64,8 +66,7 @@ const page = () => {
           <button
             onClick={() => AddTab({
               title: "i", 
-              artist: "Kendrick Lamar", 
-              userid: 1
+              artist: "Kendrick Lamar"
             })}
             className='cursor-pointer px-4 py-1 bg-green-300 hover:bg-green-400 rounded-2xl transition'>
             Add new tab

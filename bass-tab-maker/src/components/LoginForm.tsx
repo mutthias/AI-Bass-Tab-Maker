@@ -38,6 +38,7 @@ const LoginForm = () => {
           email,
           password,
         }),
+        credentials: "include"
       });
 
       const data = await res.json();
